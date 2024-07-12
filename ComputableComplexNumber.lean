@@ -46,7 +46,7 @@ def sample2 : complexQ where
   re := 0
   im := (-3)
 
-def sample3 : complexQ := ⟨0, -3⟩    -- complex number 1+10i
+def sample3 : complexQ := ⟨0, -3⟩    -- complex number -3i
 
 def sample4 : ℚ[i] :=   -- complex 1.5 + (3/2)i
 {
@@ -946,7 +946,7 @@ theorem im_eq_add_conj (z : ℚ[i]) : (z.im : ℚ) = (z - conj z) / (I*2) := by
 def z1 : ℚ[i] := 2+4*I
 def z2 : ℚ[i] := 4-I/2
 
-#eval (z1+z2)/2
+#eval (z1+z2)/2  -- mid-point is a symmetric operation
 #eval (z2+z1)/2
 
 
@@ -969,7 +969,7 @@ example  (H A B A' B' M: ℚ[i])
   ring
 
 
-
+-- Actually, the above proof can be done in ℂ
 example  (H A B A' B' M: ℂ)
   (h1 : A' = (Complex.I)*(A-H) )  (h2 : B' = -(Complex.I)*(B-H) )
   (h3 : M = (A'+B')/2 )
@@ -977,16 +977,6 @@ example  (H A B A' B' M: ℂ)
   rw [h3, h2, h1]
   ring
 
-def A :ℂ  := Complex.mk 2 3
-def B :ℂ  := Complex.mk (-2) 4
 
--- #eval A/B
-
-def A' : ℚ[i]  := complexQ.mk 2 3
-def B' : ℚ[i]  := complexQ.mk (-2) 4
-
-#eval A'/B'
-
-#check Nat 
 
 end complexQ
