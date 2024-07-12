@@ -949,33 +949,38 @@ def z2 : ℚ[i] := 4-I/2
 #eval (z1+z2)/2  -- mid-point is a symmetric operation
 #eval (z2+z1)/2
 
-
 -- Tree problem
 /- In the island there are only 2 trees, A and B, and the remnants of a hanging place.
 
 Start at the hanging place and count the steps to go in a straight
 line to tree A. When you arrive, turn 90º to the left and walk the
-same amount of steps. Where you stopped, place a mark on the ground.
+same amount of steps. Where you stopped, place a mark on the ground, and call this point A'
 
 Go back to the hanging place and count the steps to tree B, also in a
 straight line.  When there, turn 90º to the right and walk the same
-amount of steps forward and place a mark on the ground.
+amount of steps forward and place a mark on the ground. This is point B'
+
+Bury the treasure box at the mid-point of A' and B'.
+
+-- H : Hanging place
+-- A : tree A
+-- B : tree B
+-- A': the first mark on the ground
+-- B': the second mark
+-- T : Location of the treasure box
 -/
-example  (H A B A' B' M: ℚ[i])
-  (h1 : A' = I*(A-H) )  (h2 : B' = -I*(B-H) )
-  (h3 : M = (A'+B')/2 )
-    : M = I*(A-B)/2 := by
+
+-- Prove that we can find the location of the treasure box even if
+-- the hanging place disappeared in the island.
+-- Show that the location of the treasure box does not depend on the
+-- location of the hanging place
+example  {H A B A' B' T: ℚ[i]}
+  (h1 : A' = A+I*(A-H) )  (h2 : B' = B-I*(B-H) )
+  (h3 : T = (A'+B')/2 )
+    : T = (A+B)/2+ I*(A-B)/2 := by
   rw [h3, h2, h1]
   ring
 
-
--- Actually, the above proof can be done in ℂ
-example  (H A B A' B' M: ℂ)
-  (h1 : A' = (Complex.I)*(A-H) )  (h2 : B' = -(Complex.I)*(B-H) )
-  (h3 : M = (A'+B')/2 )
-    : M = (Complex.I)*(A-B)/2 := by
-  rw [h3, h2, h1]
-  ring
 
 
 
