@@ -7,3 +7,4 @@ List of topics
 - Roots_of_equation : Verify the roots of polynomial equation
 - ExampleOfInductoin : Proof by mathematical induction
 - SimplicialComplex : Re-writing Chapter 3 of Loh's "Exploring formalization" in LEAN4
+- ComputableComplexNumber : Formalization of the number field Q[i], the quotient field of the Gaussian integers. This is similar to the  [Complex](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Complex/Basic.html) type in Mathlib, except that the real and imaginary parts are rational numbers, so that the functions are computable.
