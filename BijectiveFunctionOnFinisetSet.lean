@@ -16,15 +16,13 @@ and a function f from X to Y, the followings are equivalent:
 Finite set X is represented as an element in `Finset α`, and
 finite set Y is represented as an element in `Finset β`
 
-The proofs invoke on two functions from Mathlib
+We use two functions related to the pigeonhole principle from Mathlib:
+
 `Finset.surj_on_of_inj_on_of_card_le`
-(If f is an injective function from set X to set Y and |X|≤|Y|, then f is a bijection)
-
-and
-
+(If f is an injective function from set X to set Y and |Y|≤|X|, then f is a surjection
 
 `Finset.inj_on_of_surj_on_of_card_le`
-(If f is an surjective function from set X to set Y and |Y|≤|X|, then f is a bijection)
+(If f is an surjective function from set X to set Y and |X|≤|Y|, then f is a injection)
 
 
 At the end of this file, we give a proof that there is no bijection
