@@ -81,10 +81,17 @@ For $x$ and $y$ and $z$,
 - If all of the values in the column are 1s, the expression is said to be **unsatisfiable**.
 
 `x  y   x ∧ y  x ∧ y  x⊕y  x → y`
+
 `0  0     0      0      0     1`
+
 `0  1     0      1      1     0`
+
 `1  0     0      1      1     1`
+
 `1  1     1      1      0     1`
+
+
+
 
 
 
