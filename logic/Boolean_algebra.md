@@ -38,7 +38,7 @@ $$\begin{align}
 ### Definition (Binary relation)
 - A **binary relation** $R$ between two sets $A$ and $B$ is a subset of 
 $$\{(a,b):\, a\in A \text{ and } b\in B\}$$
-* We say that "$a$ is related to $b$" if $(a,b)\in R$.
+* We say that " $a$ is related to $b$" if $(a,b)\in R$.
 * We write $a R b$ if $a$ is related to $b$.
 
 ### Definition (Equivalence relation)
