@@ -7,7 +7,7 @@
 
 ### Definition (Syntax of Boolean expressions)
 
-$$ E ::= 1\, |\, 0\, |\, x \, |\, \neg E\, |\, E\wedge E\, |\,  E \vee E 
+$$ E ::= 1 | 0 | x  | \neg E | E\wedge E | E \vee E 
 $$
 - Atomic expression
 	- $1$, $0$, $x$
