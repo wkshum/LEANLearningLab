@@ -4,6 +4,14 @@ import Mathlib.Tactic
 
  Well-founded induction
 
+ In systems like ZFC Set Theory, well-foundedness is just a
+ property of sets used to avoid paradoxes (like the Axiom of Foundation).
+ In Lean (and dependent type theory in general), well-foundedness is
+ a computational data structure (Acc) that the compiler manipulates to
+ guarantee program safety, prove the consistency of the logic, and
+ safely compile high-level math down to optimized C code.
+
+ As a result, well-foundedness is built directly into the core of Lean.
 -/
 
 open Classical
