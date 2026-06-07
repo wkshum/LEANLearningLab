@@ -6,8 +6,6 @@
   Curry-Howard correspondence between Product and And
 -/
 
-
-
 section Product_and_And
 
 -- since Lean already have the definition of
@@ -168,48 +166,6 @@ def andComm' {P Q : Prop} : And P Q → And Q P :=
   fun h => And.mk (right h) (left h)
 
 
--- Curry and uncurry for Prod
-def curry {A B C : Type} :
-    (Prod A B → C) → A → B → C :=
-  fun f a b => f (Prod.mk a b)
-
-def uncurry {A B C : Type} :
-    (A → B → C) → Prod A B → C :=
-  fun f p => f p.fst p.snd
-
-def addCurried : Nat → Nat → Nat :=
-  fun a b => a + b
-
-#eval uncurry addCurried (Prod.mk 10 20) -- 30
-
--- computation rule
-example {A B C : Type} (f : A → B → C) (a : A) (b : B) :
-    uncurry f (Prod.mk a b) = f a b := by
-  rfl
-
--- Curry and uncurry for And
-def andCurry {P Q R : Prop} :
-    (And P Q → R) → P → Q → R :=
-  fun f p q => f (And.mk p q)
-
-def andUncurry {P Q R : Prop} :
-    (P → Q → R) → And P Q → R :=
-  fun f h => f h.fst h.snd
-
-example {P Q R : Prop}
-    (h : And P Q → R) :
-    P → Q → R :=
-  andCurry h
-
-example {P Q R : Prop}
-    (h : P → Q → R) :
-    And P Q → R :=
-  andUncurry h
-
--- Computation rule
-example {P Q R : Prop} (f : P → Q → R) (p : P) (q : Q) :
-    andUncurry f (And.mk p q) = f p q := by
-  rfl
 
 
 -- eta rule for Prod
