@@ -196,7 +196,7 @@ def forallToExists {A : Type} {P : A → Prop} {R : Prop} :
     | MyExists.intro w hw => f w hw
 
 
-/- 8. Built-in Sigma and Exists
+/- 8. Sigma and Existsin Lean's programming
 
 Lean has both of these built-in.
 
@@ -235,14 +235,7 @@ example : ∃ (n : Nat), n = 5 :=
 example : ∃ (n : Nat), n + 2 = 7 :=
   ⟨5, rfl⟩
 
-/-
- dependent sum type in Lean's syntax
--/
 variable (A : Type) (B : A → Type)
-
--- Custom version:
-#check MySigma A B
--- MySigma A B : Type
 
 -- Lean's built-in syntax:
 #check Σ (a : A), B a
