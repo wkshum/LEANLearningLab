@@ -1,3 +1,5 @@
+import Mathlib.Tactic
+
 /-
 ===========================
 ## How to prove 3 = 0 ?
