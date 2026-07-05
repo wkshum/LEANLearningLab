@@ -15,15 +15,22 @@ section monoid
 
 /-
   Structure for defining a monoid.
+  Type `M` is the underlying type of the monoid.
+  `mul` is the binary operation of the monoid.
+  `e` is the identity element of the monoid.
+  `assoc` is the associativity property of the binary operation.
+  `identity` is the identity property of the binary operation.
 -/
-structure Monoid m where
-  mul : m → m → m
-  e : m
+structure Monoid M where
+  mul : M → M → M
+  e : M
   assoc : mul a ( mul b c) = mul ( mul a b) c
   identity : mul a e = a ∧ mul e a = a
 
+
+
 /-
- Monoid of function
+ Monoid of functions
 -/
 def Monoid.function : Monoid (α → α) where
   mul f g := f ∘ g
@@ -37,8 +44,11 @@ def Monoid.function : Monoid (α → α) where
     · rfl
     · rfl
 
-/- opposite monoid-/
-def Monoid.op (mon : Monoid m) : Monoid m where
+/- opposite monoid
+  It is basically the same monoid but
+  with the order of multiplication reversed.
+-/
+def Monoid.op (mon : Monoid M) : Monoid M where
   mul a b := mon.mul b a
   e := mon.e
   assoc := by
@@ -50,11 +60,12 @@ def Monoid.op (mon : Monoid m) : Monoid m where
     · exact mon.identity.2
     · exact mon.identity.1
 
+
 /-
-Product monoid
+  Product monoid
 -/
-def Monoid.product (mon₁ : Monoid m₁) (mon₂ : Monoid m₂)
-    : Monoid (m₁ × m₂) where
+def Monoid.product (mon₁ : Monoid M₁) (mon₂ : Monoid M₂)
+    : Monoid (M₁ × M₂) where
   mul x y  := ( mon₁.mul x.1 y.1, mon₂.mul x.2 y.2 )
   e := ( mon₁.e, mon₂.e )
   assoc := by
@@ -68,8 +79,18 @@ def Monoid.product (mon₁ : Monoid m₁) (mon₂ : Monoid m₂)
 
 end monoid
 
+
+
+
 section preorder
 
+/-
+  Structure for defining a preorder.
+  Type `α` is the underlying type of the preorder.
+  `leq` is the binary relation of the preorder.
+  `trans` is the transitivity property of the binary relation.
+  `reflex` is the reflexivity property of the binary relation.
+-/
 structure Preorder α where
   leq : α → α → Prop
   trans : leq a b → leq b c → leq a c
@@ -98,8 +119,8 @@ def Preorder.op (pre : Preorder α) : Preorder α where
 /-
   Product preorder
 -/
-def Preorder.product (pre₁ : Preorder p₁) (pre₂ : Preorder p₂)
-  : Preorder (p₁ × p₂) where
+def Preorder.product (pre₁ : Preorder P₁) (pre₂ : Preorder P₂)
+  : Preorder (P₁ × P₂) where
   leq x y := pre₁.leq x.1 y.1 ∧ pre₂.leq x.2 y.2
   trans := by
     intro a b c a_leq_b b_leq_c
@@ -114,10 +135,19 @@ def Preorder.product (pre₁ : Preorder p₁) (pre₂ : Preorder p₂)
 
 end preorder
 
+
+
+
 section category
 
 /-
-  Category structure
+  Data structure for defining a category.
+  Type `obj` is the underlying type of the category.
+  `hom o1 o2` is the type of morphisms between objects `o1` and `o2`.
+  `compose` is the composition of morphisms.
+  `reflex` is the identity morphism for an object.
+  `assoc` is the associativity property of morphism composition.
+  `identity` is the identity property of morphism composition.
 -/
 structure Category obj where
   hom : obj → obj → Type v
@@ -126,18 +156,30 @@ structure Category obj where
   assoc : compose f (compose g h) = compose (compose f g) h
   identity : compose f reflex = f ∧ compose reflex f = f
 
+
+/-
+  Monoid as a category
+-/
 def Category.monoid (mon : Monoid m) : Category Unit where
-  hom _ _ := m
+  hom _ _ := m  -- the type of morphisms is the underlying type of the monoid
   compose := mon.mul
   reflex := mon.e
   assoc := mon.assoc
   identity := mon.identity
 
+/-
+  Leq structure
+  `leq_proof` is a proof that `a ≤ b` in the preorder `pre`.
+-/
 structure Leq (pre : Preorder p) (a b : p) : Type where
    leq_proof : pre.leq a b
 
+
+/-
+  Preorder as a category
+-/
 def Category.preorder (pre : Preorder p) : Category p where
-  hom a b := Leq pre a b
+  hom a b := Leq pre a b  -- the type of morphisms is the leq structure
   compose f g := {leq_proof := pre.trans f.leq_proof g.leq_proof}
   reflex := {leq_proof := pre.reflex}
   assoc := by
@@ -183,7 +225,7 @@ def Category.product {obj₁ obj₂} (cat₁ : Category obj₁) (cat₂ : Catego
     · rw [ cat₁.identity.2, cat₂.identity.2 ]
 
 /-
-  The morphism of this category is a function between two
+  The morphisms of this category are functions between two
   objects. Composition of function is the usual function composition.
 -/
 def Category.function : Category (Type v) where
