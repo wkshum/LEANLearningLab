@@ -1,6 +1,6 @@
 /- Lean Learning Lab Tutorial
 
-Oct 9, 2024
+Jul 17, 2026
 
 Logical operations
 
