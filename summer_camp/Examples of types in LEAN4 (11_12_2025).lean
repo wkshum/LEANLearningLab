@@ -1,7 +1,6 @@
 /-
 
-  Lean Learning Lab
-  12 Nov 2025
+  AI4Math Summer camp 
 
   Examples of types in LEAN4
 
