@@ -41,17 +41,17 @@ example (hb :B) : A ∨ B := by
 
 -- An example for Mechanics of Proof
 -- Show that if x=1 OR y=1, then x*y+x = y+1
-example (x y : ℝ) (h : x=1 ∨ y= -1) :
-  x*y+x=y+1  := by
-  obtain hx | hy := h
-  calc
-    x*y+x = 1*y + 1 := by rw [hx]
-        _ = y+ 1 := by ring
-  calc
-    x*y+x = x*(-1)+x := by rw [hy]
- --       _ = 0 := by ring
-        _ = (-1)+1 := by ring
-        _ = y+1 := by rw [hy]
+example (x y : ℝ) (h: x=1 ∨ y=-1) :
+  x*y+x = y + 1 := by 
+  obtain h1 | h2 := h
+  · calc 
+      x*y+x = 1 *y+1 := by rw [h1]
+           _= y+ 1 := by ring
+  · calc
+      x*y+x = x*(-1)+x := by rw [h2]
+          _ = 0 := by ring
+          _ = (-1) + 1 := by ring
+          _ = y+1 := by rw [h2]
 
 
 
